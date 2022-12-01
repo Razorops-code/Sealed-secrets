@@ -14,22 +14,22 @@
 
 ```kubectl -n elk  get pods```
 
-###Check the logs of the sealed secret controller
+### Check the logs of the sealed secret controller
 
 ```kubectl -n elk logs sealed-secrets ```
 
-###From the logs we can see that it writes the encryption key its going to use as a kubernetes secret
+### From the logs we can see that it writes the encryption key its going to use as a kubernetes secret
 Example log:
 
 ```2022/11/27 21:38:20 New key written to kube-system/sealed-secrets-keymwzn9```
 
-###Encryption keys
+### Encryption keys
 
 ```kubectl -n elk get secrets
 kubectl -n elk get secret sealed-secrets-keygxlvg -o yaml
 ```
 
-## Download KubeSeal
+### Download KubeSeal
 
 The same way we downloaded the sealed secrets controller from the [GitHub releases](https://github.com/bitnami-labs/sealed-secrets/releases) page,
 we'll want to download kubeseal from the assets section 
@@ -43,7 +43,7 @@ mv /tmp/kubeseal /usr/local/bin/
 ```
 We can now run `kubeseal --help`
 
-## Sealing a basic Kubernetes Secret 
+### Sealing a basic Kubernetes Secret 
 ```kubeseal \
       --controller-name=elk-sealed-secrets \
       --controller-namespace=elk \
