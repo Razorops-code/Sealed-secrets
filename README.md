@@ -2,13 +2,13 @@
 
 ### Add repository
 
-'''helm repo add bitnami-labs https://bitnami-labs.github.io/sealed-secrets/'''
+```helm repo add bitnami-labs https://bitnami-labs.github.io/sealed-secrets/```
 
 ### Install chart in elk namespace 
 
 ### metion namespace otherwide it will be install in kube-system namespace
 
-'''helm install elk-sealed-secret bitnami-labs/sealed-secrets --version 2.7.1 -n elk'''
+```helm install elk-sealed-secret bitnami-labs/sealed-secrets --version 2.7.1 -n elk```
 
 ### Check the installation
 
@@ -43,15 +43,18 @@ mv /tmp/kubeseal /usr/local/bin/
 ```
 We can now run `kubeseal --help`
 
-### Sealing a basic Kubernetes Secret 
-```kubeseal \
+### Sealing a basic Kubernetes Secret
+ 
+```
+   kubeseal \
       --controller-name=elk-sealed-secrets \
       --controller-namespace=elk \
       --format yaml > sealed-secret.yaml
 ```
 ### if you would rather not need to access to the cluster to genrate sealed secret you can run
 
-```kubeseal \
+```
+   kubeseal \
       --controller-name=new-sealed-secrets \
       --controller-namespace=elk \
       --fetch-cert > cert.pem
