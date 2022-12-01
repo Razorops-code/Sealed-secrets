@@ -2,13 +2,19 @@
 
 ### Add repository
 
-```helm repo add bitnami-labs https://bitnami-labs.github.io/sealed-secrets/```
+```
+helm repo add bitnami-labs https://bitnami-labs.github.io/sealed-secrets/
+
+```
 
 ### Install chart in elk namespace 
 
 ### metion namespace otherwide it will be install in kube-system namespace
 
-```helm install elk-sealed-secret bitnami-labs/sealed-secrets --version 2.7.1 -n elk```
+```
+helm install elk-sealed-secret bitnami-labs/sealed-secrets --version 2.7.1 -n elk
+
+```
 
 ### Check the installation
 
@@ -18,18 +24,23 @@ kubectl -n elk  get pods
 
 ### Check the logs of the sealed secret controller
 
-```kubectl -n elk logs sealed-secrets ```
+```
+kubectl -n elk logs sealed-secrets 
+```
 
 ### From the logs we can see that it writes the encryption key its going to use as a kubernetes secret
 Example log:
 
-```2022/11/27 21:38:20 New key written to kube-system/sealed-secrets-keymwzn9```
+```
+2022/11/27 21:38:20 New key written to kube-system/sealed-secrets-keymwzn9
+```
 
 ### Encryption keys
 
 ```
 kubectl -n elk get secrets
 kubectl -n elk get secret sealed-secrets-keygxlvg -o yaml
+
 ```
 
 ### Download KubeSeal
@@ -69,6 +80,7 @@ kubeseal < /home/ubuntu/ELK/secret.yaml --cert cert.pem -o yaml > /home/ubuntu/E
 
 ### apply the sealed secret 
 
-``` kubectl apply -f sealed-secret.yaml```
+``` kubectl apply -f sealed-secret.yaml
+```
 
 Both the SealedSecret and generated Secret must have the name and namespace.
