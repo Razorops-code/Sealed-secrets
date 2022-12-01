@@ -80,7 +80,8 @@ kubeseal < /home/ubuntu/ELK/secret.yaml --cert cert.pem -o yaml > /home/ubuntu/E
 
 ### apply the sealed secret 
 
-``` kubectl apply -f sealed-secret.yaml
+``` 
+kubectl apply -f sealed-secret.yaml
 ```
 
 Both the SealedSecret and generated Secret must have the name and namespace.
