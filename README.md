@@ -57,6 +57,15 @@ mv /tmp/kubeseal /usr/local/bin/
 ```
 We can now run `kubeseal --help`
 
+check the 'elasticsearch-master-credentials' in sercets
+```
+kubectl get secrets -n elk
+```
+copy that file in yaml format using 
+```
+kubectl get secret elasticsearch-master-credentials -o yaml -n elk > elasticsearch-master-credentials.yaml
+```
+
 ### Sealing a basic Kubernetes Secret
  
 ```
@@ -75,7 +84,7 @@ We can now run `kubeseal --help`
 ```
 to retrieve the public cert used for encryption and store it locally . You can run ' kubeseal --cert mycert.pem' insted to use the local cert e.g 
 ```
-kubeseal < /home/ubuntu/ELK/secret.yaml --cert cert.pem -o yaml > /home/ubuntu/ELK/sealed-secret.yaml 
+kubeseal < /home/ubuntu/ELK/elasticsearch-master-credentials.yaml --cert cert.pem -o yaml > /home/ubuntu/ELK/sealed-secret.yaml 
 ```
 
 ### apply the sealed secret 
@@ -83,5 +92,8 @@ kubeseal < /home/ubuntu/ELK/secret.yaml --cert cert.pem -o yaml > /home/ubuntu/E
 ``` 
 kubectl apply -f sealed-secret.yaml
 ```
+we can check the sealed secrets 
+```
+kubectl get sealedsecerets -n elk      ```
 
 Both the SealedSecret and generated Secret must have the name and namespace.
