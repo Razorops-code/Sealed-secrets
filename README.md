@@ -12,7 +12,9 @@
 
 ### Check the installation
 
-```kubectl -n elk  get pods```
+``` 
+kubectl -n elk  get pods
+```
 
 ### Check the logs of the sealed secret controller
 
@@ -25,7 +27,8 @@ Example log:
 
 ### Encryption keys
 
-```kubectl -n elk get secrets
+```
+kubectl -n elk get secrets
 kubectl -n elk get secret sealed-secrets-keygxlvg -o yaml
 ```
 
