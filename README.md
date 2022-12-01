@@ -12,22 +12,22 @@
 
 ### Check the installation
 
-'''kubectl -n elk  get pods'''
+```kubectl -n elk  get pods```
 
 ###Check the logs of the sealed secret controller
 
-kubectl -n elk logs sealed-secrets 
+```kubectl -n elk logs sealed-secrets ```
 
 ###From the logs we can see that it writes the encryption key its going to use as a kubernetes secret
 Example log:
 
-'''2022/11/27 21:38:20 New key written to kube-system/sealed-secrets-keymwzn9'''
+```2022/11/27 21:38:20 New key written to kube-system/sealed-secrets-keymwzn9```
 
 ###Encryption keys
 
-'''kubectl -n elk get secrets
+```kubectl -n elk get secrets
 kubectl -n elk get secret sealed-secrets-keygxlvg -o yaml
-'''
+```
 
 ## Download KubeSeal
 
@@ -44,24 +44,25 @@ mv /tmp/kubeseal /usr/local/bin/
 We can now run `kubeseal --help`
 
 ## Sealing a basic Kubernetes Secret 
-kubeseal \
+```kubeseal \
       --controller-name=elk-sealed-secrets \
       --controller-namespace=elk \
       --format yaml > sealed-secret.yaml
+```
 ### if you would rather not need to access to the cluster to genrate sealed secret you can run
 
-'''kubeseal \
+```kubeseal \
       --controller-name=new-sealed-secrets \
       --controller-namespace=elk \
       --fetch-cert > cert.pem
-'''
+```
 to retrieve the public cert used for encryption and store it locally . You can run ' kubeseal --cert mycert.pem' insted to use the local cert e.g 
-'''
+```
 kubeseal < /home/ubuntu/ELK/secret.yaml --cert cert.pem -o yaml > /home/ubuntu/ELK/sealed-secret.yaml 
-'''
+```
 
 ### apply the sealed secret 
 
-''' kubectl apply -f sealed-secret.yaml'''
+``` kubectl apply -f sealed-secret.yaml```
 
 Both the SealedSecret and generated Secret must have the name and namespace.
