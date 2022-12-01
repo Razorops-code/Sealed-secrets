@@ -96,4 +96,4 @@ we can check the sealed secrets
 ```
 kubectl get sealedsecerets -n elk      ```
 
-Both the SealedSecret and generated Secret must have the name and namespace.
+#Both the SealedSecret and generated Secret must have the name and namespace.
